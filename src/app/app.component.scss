@@ -1,9 +1,13 @@
+@import '../colors.scss';
+
 header{
   display: flex;
   justify-content: center;
   align-items: center;
+  background: $light;
   h1{
     margin: 0.8em;
     cursor: pointer;
+    color: $lightest;
   }
 }
