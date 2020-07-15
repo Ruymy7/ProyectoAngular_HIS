@@ -4,6 +4,8 @@ import { Professional } from 'src/app/models/professional.model';
 import { Patient } from 'src/app/models/patient.model';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/dialog/dialog/dialog.component';
 
 @Component({
   selector: 'app-user-list',
@@ -13,26 +15,48 @@ import { User } from 'src/app/models/user.model';
 export class UserListComponent {
   patients: Patient[]
   professionals: Professional[]
-  patientDisplayedColumns = ['NHC', 'name', 'lastName', 'gender', 'edit', 'delete']
-  professionalDisplayedColumns = ['medicalBoardNumber', 'name', 'lastName', 'gender', 'edit', 'delete']
+  patientDisplayedColumns = ['NHC', 'name', 'lastName', 'gender', 'edit', 'delete', 'more']
+  professionalDisplayedColumns = ['medicalBoardNumber', 'name', 'lastName', 'gender', 'edit', 'delete', 'more']
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private dialog: MatDialog) { }
 
-  ngOnInit(): void {
+  private getAllUsers() {
     this.userService.getAllUsers().subscribe(result => {
+      this.patients = []
+      this.professionals = []
       result.forEach((r: Patient | Professional) => {
         if (r.hasOwnProperty('NHC')) {
-          if (this.patients) this.patients.push(<Patient>r)
-          else this.patients = [<Patient>r]
+          this.patients.push(<Patient>r)
         } else {
-          if (this.professionals) this.professionals.push(<Professional>r)
-          else this.professionals = [<Professional>r]
+          this.professionals.push(<Professional>r)
         }
       })
     })
   }
 
+  ngOnInit(): void {
+    this.getAllUsers()
+  }
+
   getUser(row: User): void {
-    this.router.navigate(['/users/'+row.id])
+    this.router.navigate(['/users/' + row.id])
+  }
+
+  deleteUser(row: User): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '350px',
+      data: { title: 'Eliminar ' + row.name, body: '¿Está seguro de que desea eliminar el usuario?' }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.deleteUser(row.id).subscribe(() => {
+          this.getAllUsers();
+        });
+      }
+    });
+  }
+
+  editUser(row: User): void {
+    this.router.navigate(['/users/edit/' + row.id])
   }
 }

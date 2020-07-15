@@ -24,8 +24,8 @@ export class UserService {
   editUser(userData: Patient | Professional): void {
     this.httpClient.put(environment.API_URL + 'users', userData)
   }
-  deleteUser(id: string): void {
-    this.httpClient.delete(environment.API_URL + `users/${id}`)
+  deleteUser(id: number): Observable<Patient | Professional> {
+    return this.httpClient.delete<Patient | Professional>(environment.API_URL + `users/${id}`)
   }
 
 }

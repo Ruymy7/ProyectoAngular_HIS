@@ -7,12 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDetailsComponent } from './user/user-details/user-details/user-details.component';
+import { DialogComponent } from './dialog/dialog/dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
