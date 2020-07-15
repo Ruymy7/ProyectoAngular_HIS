@@ -1,0 +1,91 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "NHC": "12344",
+      "name": "Ruymán Paciente",
+      "lastName": "Padrón",
+      "secondLastName": "Castañeda",
+      "gender": "M",
+      "birthdate": "02/09/1997",
+      "idNumber": "44558825J",
+      "address": {
+        "street": "San Cipriano",
+        "number": "5",
+        "door": "1º E",
+        "postalCode": "28018",
+        "city": "Madrid"
+      },
+      "insurance": [
+        {
+          "cardNumber": "555888999",
+          "name": "Mi Seguro",
+          "type": "salud"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "medicalBoardNumber": "medico",
+      "name": "Ruymán Médico",
+      "lastName": "Padrón",
+      "secondLastName": "Castañeda",
+      "professionalType": "Médico",
+      "gender": "M",
+      "birthdate": "02/09/1997",
+      "idNumber": "44558825J",
+      "address": {
+        "street": "San Cipriano",
+        "number": "5",
+        "door": "1º E",
+        "postalCode": "28018",
+        "city": "Madrid"
+      }
+    },
+    {
+      "id": 3,
+      "NHC": "12344",
+      "name": "Ruymán Paciente",
+      "lastName": "Padrón",
+      "secondLastName": "Castañeda"
+    },
+    {
+      "id": 4,
+      "medicalBoardNumber": "medico",
+      "name": "Ruymán Médico",
+      "lastName": "Padrón",
+      "secondLastName": "Castañeda",
+      "professionalType": "Médico"
+    },
+    {
+      "id": 5,
+      "NHC": "12344",
+      "name": "Ruymán Paciente",
+      "lastName": "Padrón",
+      "secondLastName": "Castañeda"
+    },
+    {
+      "id": 6,
+      "medicalBoardNumber": "medico",
+      "name": "Ruymán Médico",
+      "lastName": "Padrón",
+      "secondLastName": "Castañeda",
+      "professionalType": "Médico"
+    },
+    {
+      "id": 7,
+      "NHC": "12344",
+      "name": "Ruymán Paciente",
+      "lastName": "Padrón",
+      "secondLastName": "Castañeda"
+    },
+    {
+      "id": 8,
+      "medicalBoardNumber": "medico",
+      "name": "Ruymán Médico",
+      "lastName": "Padrón",
+      "secondLastName": "Castañeda",
+      "professionalType": "Médico"
+    }
+  ]
+}

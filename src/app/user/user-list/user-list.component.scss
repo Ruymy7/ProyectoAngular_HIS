@@ -1,0 +1,19 @@
+.tabGroup {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  mat-tab-group{
+    width: 80vw;
+    table {
+      width: 100%;
+      :hover {
+        background: #747171;
+      }
+      .mat-row {
+        cursor: pointer;
+      }
+    }
+  }
+}
