@@ -5,9 +5,11 @@ header{
   justify-content: center;
   align-items: center;
   background: $light;
+  min-height: 10vh;
   h1{
     margin: 0.8em;
     cursor: pointer;
     color: $lightest;
+    font-size: xx-large;
   }
 }

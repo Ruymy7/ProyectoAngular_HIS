@@ -22,6 +22,13 @@
     background: $light;
   }
 
+  .noData {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .tableFooter {
     z-index: 1;
     margin: -20px;

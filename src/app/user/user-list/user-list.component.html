@@ -1,7 +1,7 @@
 <div class="tabGroup">
   <mat-tab-group>
     <mat-tab label="Pacientes">
-      <table mat-table [dataSource]="patients" *ngIf="patients">
+      <table mat-table [dataSource]="patients" *ngIf="patients.length">
 
         <ng-container matColumnDef="NHC">
           <th mat-header-cell *matHeaderCellDef> NHC </th>
@@ -56,13 +56,13 @@
         <tr mat-row *matRowDef="let row; columns: patientDisplayedColumns;"></tr>
       </table>
 
-      <div class="noPatients" *ngIf="!patients">
+      <div class="noData" *ngIf="!patients.length">
         <h3>No hay pacientes en el sistema</h3>
       </div>
     </mat-tab>
 
     <mat-tab label="Profesionales">
-      <table mat-table [dataSource]="professionals" *ngIf="professionals">
+      <table mat-table [dataSource]="professionals" *ngIf="professionals.length">
 
         <ng-container matColumnDef="medicalBoardNumber">
           <th mat-header-cell *matHeaderCellDef> Nº Colegiado </th>
@@ -116,7 +116,7 @@
         <tr mat-header-row *matHeaderRowDef="professionalDisplayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: professionalDisplayedColumns;"></tr>
       </table>
-      <div class="noProfessional" *ngIf="!professionals">
+      <div class="noData" *ngIf="!professionals.length">
         <h3>No hay profesionales en el sistema</h3>
       </div>
     </mat-tab>
