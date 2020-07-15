@@ -8,13 +8,15 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDetailsComponent } from './user/user-details/user-details/user-details.component';
 import { DialogComponent } from './dialog/dialog/dialog.component';
+import { AddEditUserComponent } from './user/user-add-edit/add-edit-user/add-edit-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
     UserDetailsComponent,
-    DialogComponent
+    DialogComponent,
+    AddEditUserComponent
   ],
   imports: [
     BrowserModule,
