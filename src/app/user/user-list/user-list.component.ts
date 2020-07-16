@@ -61,12 +61,20 @@ export class UserListComponent {
   }
 
   deleteDoctors(): void {
-    let doctors: number[] = []
-    this.professionals.forEach((professional, index) => {
-      if (professional.hasOwnProperty('professionalType') && professional.professionalType === 'Médico') {
-        doctors.push(professional.id)
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '350px',
+      data: { title: 'Eliminar todos los médicos', body: '¿Está seguro de que desea eliminar todos los médicos?' }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        let doctors: number[] = []
+        this.professionals.forEach((professional, index) => {
+          if (professional.hasOwnProperty('professionalType') && professional.professionalType === 'Médico') {
+            doctors.push(professional.id)
+          }
+        })
+        this.userService.deleteUsers(doctors).then(() => this.getAllUsers())
       }
-    })
-    this.userService.deleteUsers(doctors).then(() => this.getAllUsers())
+    });
   }
 }
