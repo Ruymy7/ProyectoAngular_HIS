@@ -21,6 +21,11 @@
           "cardNumber": "555888999",
           "name": "Mi Seguro",
           "type": "salud"
+        },
+        {
+          "cardNumber": "555888999",
+          "name": "Mi Seguro2",
+          "type": "dental"
         }
       ]
     },

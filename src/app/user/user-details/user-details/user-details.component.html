@@ -1,1 +1,48 @@
-{{user | json}}
+<div class="userDetails">
+  <h2 *ngIf="!userType">Vista de detalle de paciente</h2>
+  <h2 *ngIf="userType">Vista de detalle de profesional</h2>
+  <mat-card class="userCard">
+    <mat-card-header>
+      <mat-card-title>{{user?.name}} {{user?.lastName}} {{user?.secondLastName}}</mat-card-title>
+      <mat-card-subtitle>
+        <p *ngIf="!userType"><span>NHC:</span> {{user?.NHC}}</p>
+        <div class="subtitle">
+          <p *ngIf="userType"><span>Nº Colegiado:</span> {{user?.medicalBoardNumber}}</p>
+          <p *ngIf="userType"><span>Tipo de profesional:</span> {{user?.professionalType}}</p>
+        </div>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider [inset]="true"></mat-divider>
+    <mat-card-content>
+      <h3>Datos personales</h3>
+      <div class="firstRow">
+        <p><span>NIF o Pasaporte</span> {{user?.idNumber}}</p>
+        <p><span>Fecha de nacimiento</span> {{user?.birthdate}}</p>
+        <p><span>Género</span> {{user?.gender}}</p>
+      </div>
+      <mat-divider [inset]="true"></mat-divider>
+      <h3>Dirección</h3>
+      <div class="addressRow">
+        <p><span>Calle</span> {{user?.address?.street}}</p>
+        <p><span>Número</span> {{user?.address?.number}}</p>
+        <p><span>Puerta</span> {{user?.address?.door}}</p>
+        <p><span>Código postal</span> {{user?.address?.postalCode}}</p>
+        <p><span>Ciudad</span> {{user?.address?.city}}</p>
+      </div>
+      <mat-divider [inset]="true"></mat-divider>
+      <div class="insuranceList" *ngIf="!userType">
+        <h3>Listado de aseguradoras</h3>
+        <div class="insurance" *ngFor="let insurance of user?.insurance">
+          <p><span>Nº tarjeta</span> {{insurance.cardNumber}}</p>
+          <p><span>Aseguradora</span> {{insurance.name}}</p>
+          <p><span>Tipo de seguro</span> {{insurance.type}}</p>
+        </div>
+        <p *ngIf="!user?.insurance?.length">No hay aseguradoras para este paciente</p>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="editUser(user)">Editar</button>
+      <button mat-raised-button color="warn" (click)="deleteUser(user)">Eliminar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
