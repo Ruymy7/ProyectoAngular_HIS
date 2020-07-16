@@ -16,7 +16,7 @@ export class UserListComponent {
   patients: Patient[]
   professionals: Professional[]
   patientDisplayedColumns = ['NHC', 'name', 'lastName', 'gender', 'edit', 'delete', 'more']
-  professionalDisplayedColumns = ['medicalBoardNumber', 'name', 'lastName', 'gender', 'edit', 'delete', 'more']
+  professionalDisplayedColumns = ['medicalBoardNumber', 'name', 'lastName', 'type', 'edit', 'delete', 'more']
 
   constructor(private userService: UserService, private router: Router, private dialog: MatDialog) { }
 
@@ -58,5 +58,15 @@ export class UserListComponent {
 
   editUser(row: User): void {
     this.router.navigate(['/users/edit/' + row.id])
+  }
+
+  deleteDoctors(): void {
+    let doctors: number[] = []
+    this.professionals.forEach((professional, index) => {
+      if (professional.hasOwnProperty('professionalType') && professional.professionalType === 'Médico') {
+        doctors.push(professional.id)
+      }
+    })
+    this.userService.deleteUsers(doctors).then(() => this.getAllUsers())
   }
 }

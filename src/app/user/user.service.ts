@@ -27,5 +27,12 @@ export class UserService {
   deleteUser(id: number): Observable<Patient | Professional> {
     return this.httpClient.delete<Patient | Professional>(environment.API_URL + `users/${id}`)
   }
+  deleteUsers(ids: number[]): Promise<object> { // This is a solution if the backend doesn't support multiple deletion
+    let promiseArray:Promise<object>[] = []
+    ids.forEach(id => {
+      promiseArray.push(this.httpClient.delete(environment.API_URL + `users/${id}`).toPromise())
+    })
+    return Promise.all(promiseArray)
+  }
 
 }
