@@ -4,7 +4,9 @@
   justify-content: center;
   align-items: center;
   margin: 20px;
+  min-width: 75vw;
   .userCard {
+    width: 100%;
     max-width: 1000px;
     span {
       color: black;
