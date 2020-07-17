@@ -58,19 +58,21 @@ export class AddAndEditUserComponent implements OnInit {
         this.form.value.id = this.userId
         this.userService.editUser(this.form.value).subscribe(result => {
           this.saved = true
+          this.scrollToTop()
           setTimeout(() => {
             this.saved = false
             this.router.navigate([`/users/${this.userId}`])
           }, 2000)
-        }, error => {this.errorMsg = true})
+        }, error => { this.errorMsg = true; this.scrollToTop() })
       }
       else this.userService.addUser(this.form.value).subscribe(result => {
         this.saved = true
+        this.scrollToTop()
         setTimeout(() => {
           this.saved = false
           this.router.navigate([`/users/${result.id}`])
         }, 2000)
-      })
+      }, error => { this.errorMsg = true; this.scrollToTop() })
     } else {
       this.form.markAllAsTouched()
     }
@@ -137,6 +139,14 @@ export class AddAndEditUserComponent implements OnInit {
 
   deleteInsurance(insurance): void {
     this.insuranceList.removeAt(insurance)
+  }
+
+  scrollToTop(): void {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   get name() { return this.form.get('name') }

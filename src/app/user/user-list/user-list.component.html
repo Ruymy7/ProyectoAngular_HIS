@@ -1,5 +1,5 @@
 <div class="tabGroup">
-  <mat-tab-group>
+  <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
     <mat-tab label="Pacientes">
       <table mat-table [dataSource]="patients" *ngIf="patients?.length">
 
@@ -46,7 +46,8 @@
         <ng-container matColumnDef="more">
           <th mat-header-cell *matHeaderCellDef> + info </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-mini-fab aria-label="Más información" (click)="getUser(element)" matTooltip="Más información" class="more">
+            <button mat-mini-fab aria-label="Más información" (click)="getUser(element)" matTooltip="Más información"
+              class="more">
               <mat-icon>info</mat-icon>
             </button>
           </td>
@@ -107,7 +108,8 @@
         <ng-container matColumnDef="more">
           <th mat-header-cell *matHeaderCellDef> + info </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-mini-fab aria-label="Más información" (click)="getUser(element)" matTooltip="Más información" class="more">
+            <button mat-mini-fab aria-label="Más información" (click)="getUser(element)" matTooltip="Más información"
+              class="more">
               <mat-icon>info</mat-icon>
             </button>
           </td>
@@ -122,8 +124,12 @@
     </mat-tab>
   </mat-tab-group>
   <div class="tableFooter">
-    <button mat-raised-button color="warn" (click)="deleteDoctors()">Eliminar médicos</button>
-    <button mat-fab aria-label="Nuevo usuario" matTooltip="Añadir usuario" id="addBtn" routerLink="/users/new">
+    <button mat-raised-button color="warn" (click)="deleteDoctors()" *ngIf="selectedTab === 1">Eliminar médicos</button>
+    <button mat-fab aria-label="Nuevo usuario" matTooltip="Añadir usuario" id="addBtn" [matMenuTriggerFor]="beforeMenu">
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item routerLink="/users/new" [queryParams]="{type: 0}">Añadir paciente</button>
+        <button mat-menu-item routerLink="/users/new" [queryParams]="{type: 1}">Añadir profesional</button>
+      </mat-menu>
       <mat-icon>add</mat-icon>
     </button>
   </div>

@@ -5,6 +5,12 @@
         <mat-card-title *ngIf="!userId">Añadir usuario</mat-card-title>
         <mat-card-title *ngIf="userId">Editar usuario</mat-card-title>
       </mat-card-header>
+      <div class="saved" *ngIf="saved">
+        <mat-icon>save</mat-icon> Usuario guardado correctamente
+      </div>
+      <div class="errorMsg" *ngIf="errorMsg">
+        <mat-icon>error</mat-icon> Se ha producido un error. Inténtalo de nuevo.
+      </div>
       <mat-card-content>
         <h3>Datos personales</h3>
         <div class="row">
@@ -168,8 +174,10 @@
 
       </mat-card-content>
       <mat-card-actions>
-        <button mat-stroked-button routerLink='/'><mat-icon>arrow_back_ios</mat-icon> Cancelar</button>
-        <button mat-raised-button color="primary" type="submit"><mat-icon>save</mat-icon> Guardar</button>
+        <div class="buttons">
+          <button mat-stroked-button routerLink='/'><mat-icon>arrow_back_ios</mat-icon> Cancelar</button>
+          <button mat-raised-button color="primary" type="submit"><mat-icon>save</mat-icon> Guardar</button>
+        </div>
       </mat-card-actions>
     </form>
   </mat-card>
