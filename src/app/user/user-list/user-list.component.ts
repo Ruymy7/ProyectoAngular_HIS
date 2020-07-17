@@ -16,8 +16,8 @@ import { MatTabChangeEvent, MatTabGroup } from '@angular/material/tabs';
 export class UserListComponent {
   patients: Patient[]
   professionals: Professional[]
-  patientDisplayedColumns = ['NHC', 'name', 'lastName', 'gender', 'edit', 'delete', 'more']
-  professionalDisplayedColumns = ['medicalBoardNumber', 'name', 'lastName', 'type', 'edit', 'delete', 'more']
+  patientDisplayedColumns = ['NHC', 'name', 'lastName', 'gender', 'more', 'edit', 'delete']
+  professionalDisplayedColumns = ['medicalBoardNumber', 'name', 'lastName', 'type', 'more', 'edit', 'delete']
   selectedTab: number = 0
 
   constructor(private userService: UserService, private router: Router, private dialog: MatDialog) { }
