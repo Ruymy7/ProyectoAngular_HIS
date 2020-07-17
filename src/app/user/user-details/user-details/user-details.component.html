@@ -17,7 +17,7 @@
       <h3>Datos personales</h3>
       <div class="firstRow">
         <p><span>NIF o Pasaporte</span> {{user?.idNumber}}</p>
-        <p><span>Fecha de nacimiento</span> {{user?.birthdate}}</p>
+        <p><span>Fecha de nacimiento</span> {{user?.birthdate | date: 'd MMM. y'}}</p>
         <p><span>Género</span> {{user?.gender}}</p>
       </div>
       <mat-divider [inset]="true"></mat-divider>
