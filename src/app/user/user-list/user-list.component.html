@@ -124,7 +124,7 @@
     </mat-tab>
   </mat-tab-group>
   <div class="tableFooter">
-    <button mat-raised-button color="warn" (click)="deleteDoctors()" *ngIf="selectedTab === 1">Eliminar médicos</button>
+    <button mat-raised-button color="warn" (click)="deleteDoctors()" *ngIf="selectedTab === 1" [disabled]="professionals.length">Eliminar médicos</button>
     <button mat-fab aria-label="Nuevo usuario" matTooltip="Añadir usuario" id="addBtn" [matMenuTriggerFor]="beforeMenu">
       <mat-menu #beforeMenu="matMenu" xPosition="before">
         <button mat-menu-item routerLink="/users/new" [queryParams]="{type: 0}">Añadir paciente</button>
