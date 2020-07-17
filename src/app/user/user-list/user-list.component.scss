@@ -18,6 +18,16 @@
     }
   }
 
+  .mat-header-cell {
+    font-weight: bold;
+    font-size: 14px;
+    color: black;
+  }
+
+  .mat-header-row {
+    background: #00acb525;
+  }
+
   #addBtn {
     background: $light;
   }

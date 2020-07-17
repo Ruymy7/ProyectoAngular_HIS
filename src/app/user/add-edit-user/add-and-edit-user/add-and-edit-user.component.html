@@ -2,8 +2,8 @@
   <mat-card class="card">
     <form (ngSubmit)="submit()" autocomplete="off" [formGroup]="form" *ngIf="this.form; else loading">
       <mat-card-header>
-        <mat-card-title *ngIf="!userId">Añadir usuario</mat-card-title>
-        <mat-card-title *ngIf="userId">Editar usuario</mat-card-title>
+        <mat-card-title *ngIf="!userId"><h2>Añadir usuario</h2></mat-card-title>
+        <mat-card-title *ngIf="userId"><h2>Editar usuario</h2></mat-card-title>
       </mat-card-header>
       <div class="saved" *ngIf="saved">
         <mat-icon>save</mat-icon> Usuario guardado correctamente
