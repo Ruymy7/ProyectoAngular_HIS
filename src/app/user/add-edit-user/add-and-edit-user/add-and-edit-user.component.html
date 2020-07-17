@@ -16,7 +16,7 @@
           <mat-expansion-panel [expanded]="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Datos personales
+                Datos personales <p class="requiredIcon"  *ngIf="personalDataInvalid()"> * </p>
               </mat-panel-title>
             </mat-expansion-panel-header>
             <div class="row">
@@ -57,13 +57,13 @@
                 <mat-label>NIF o Pasaporte</mat-label>
                 <input matInput placeholder="" maxlength="9" name="idNumber" class="form-control" type="text"
                   formControlName="idNumber" [class.is-invalid]="idNumber.invalid && idNumber.touched">
-                <mat-error *ngIf="name.invalid && name.touched">{{"NIF o Pasaporte incorrecto"}}</mat-error>
+                <mat-error *ngIf="idNumber.invalid && idNumber.touched">{{"NIF o Pasaporte incorrecto"}}</mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="standard">
                 <mat-label>Fecha de nacimiento</mat-label>
                 <input matInput [matDatepicker]="picker" name="birthdate" class="form-control" type="text"
-                  [max]="maxDate" formControlName="birthdate" [class.is-invalid]="idNumber.invalid && idNumber.touched"
+                  [max]="maxDate" formControlName="birthdate" [class.is-invalid]="birthdate.invalid && birthdate.touched"
                   disabled>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker disabled="false"></mat-datepicker>
@@ -121,7 +121,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Información médica
+                Información médica <p class="requiredIcon"  *ngIf="medicalInformationInvalid()"> * </p>
               </mat-panel-title>
               <mat-panel-description>
                 <p *ngIf="userType === 0">Tipo: Paciente</p>
@@ -212,13 +212,16 @@
             </ng-template>
           </mat-expansion-panel>
         </mat-accordion>
+        <p id="requiredFieldsP" *ngIf="personalDataInvalid() || medicalInformationInvalid()">
+          * Faltan campos obligatorios
+        </p>
       </mat-card-content>
       <mat-card-actions>
         <div class="buttons">
-          <button mat-stroked-button routerLink='/' type="button">
+          <button mat-stroked-button routerLink='/' type="button" [disabled]="saved">
             <mat-icon>arrow_back_ios</mat-icon> Cancelar
           </button>
-          <button mat-raised-button color="primary" type="submit">
+          <button mat-raised-button color="primary" type="submit" [disabled]="saved">
             <mat-icon>save</mat-icon> Guardar
           </button>
         </div>

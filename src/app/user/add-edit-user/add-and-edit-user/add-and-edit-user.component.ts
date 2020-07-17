@@ -148,6 +148,15 @@ export class AddAndEditUserComponent implements OnInit {
     });
   }
 
+  personalDataInvalid(): boolean {
+    return (this.name.invalid && this.name.touched) || (this.lastName.invalid && this.lastName.touched) 
+    || (this.idNumber.invalid && this.idNumber.touched) || (this.birthdate.invalid && this.birthdate.touched)
+  }
+
+  medicalInformationInvalid(): boolean {
+    return (this.NHC && this.NHC.invalid && this.NHC.touched) || (this.medicalBoardNumber && this.medicalBoardNumber.invalid && this.medicalBoardNumber.touched)
+  }
+
   get name() { return this.form.get('name') }
   get lastName() { return this.form.get('lastName') }
   get idNumber() { return this.form.get('idNumber') }
