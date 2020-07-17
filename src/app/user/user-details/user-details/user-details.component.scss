@@ -53,6 +53,11 @@
     mat-card-actions {
       display: flex;
       justify-content: flex-end;
+      margin: 20px 0px 20px 0px;
+      .backBtn {
+        margin-left: 15px;
+        width: 80%;
+      }
     }
   }  
 }

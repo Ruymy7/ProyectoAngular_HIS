@@ -41,6 +41,11 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
+      <div class="backBtn">
+        <button mat-stroked-button routerLink='/' type="button">
+          <mat-icon>arrow_back_ios</mat-icon> Atrás
+        </button>
+      </div>
       <button mat-raised-button color="primary" (click)="editUser(user)">Editar</button>
       <button mat-raised-button color="warn" (click)="deleteUser(user)">Eliminar</button>
     </mat-card-actions>
