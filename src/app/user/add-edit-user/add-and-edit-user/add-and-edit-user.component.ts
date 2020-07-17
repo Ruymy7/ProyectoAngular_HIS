@@ -56,24 +56,27 @@ export class AddAndEditUserComponent implements OnInit {
   submit(): void {
     this.errorMsg = false
     this.saved = false
+    let previousUrl = ""
     if (this.form.valid) {
       if (this.userId) {
         this.form.value.id = this.userId
         this.userService.editUser(this.form.value).subscribe(result => {
+          previousUrl = this.router.url
           this.saved = true
           this.scrollToTop()
           setTimeout(() => {
             this.saved = false
-            this.router.navigate([`/users/${this.userId}`])
+            if(this.router.url === previousUrl) this.router.navigate([`/users/${this.userId}`]) // if the user has not changed view, navigate to user details view
           }, 2000)
         }, error => { this.errorMsg = true; this.scrollToTop() })
       }
       else this.userService.addUser(this.form.value).subscribe(result => {
+        previousUrl = this.router.url
         this.saved = true
         this.scrollToTop()
         setTimeout(() => {
           this.saved = false
-          this.router.navigate([`/users/${result.id}`])
+          if(this.router.url === previousUrl) this.router.navigate([`/users/${result.id}`]) // if the user has not changed view, navigate to user details view
         }, 2000)
       }, error => { this.errorMsg = true; this.scrollToTop() })
     } else {
