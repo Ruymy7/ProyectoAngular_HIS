@@ -89,5 +89,12 @@
         margin: 0px 10px 0px 10px;
       }
     }
+
+    #loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px;
+    }
   }
 }

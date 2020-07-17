@@ -1,6 +1,6 @@
 <div class="addEditUser">
   <mat-card class="card">
-    <form (ngSubmit)="submit()" autocomplete="off" [formGroup]="form">
+    <form (ngSubmit)="submit()" autocomplete="off" [formGroup]="form" *ngIf="this.form; else loading">
       <mat-card-header>
         <mat-card-title *ngIf="!userId">Añadir usuario</mat-card-title>
         <mat-card-title *ngIf="userId">Editar usuario</mat-card-title>
@@ -180,6 +180,11 @@
         </div>
       </mat-card-actions>
     </form>
+    <ng-template #loading id="loading">
+      <div id="loading">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
   </mat-card>
 </div>
 <!-- {{form.value | json}} -->

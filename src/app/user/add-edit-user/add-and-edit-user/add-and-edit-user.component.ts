@@ -83,6 +83,7 @@ export class AddAndEditUserComponent implements OnInit {
     let insurance = []
     let medicalBoardNumber = ''
     let professionalType = ''
+
     if (this.user && this.isPatient(this.user)) {
       NHC = this.user.NHC
       this.user.insurance.forEach(ins => {
@@ -92,6 +93,7 @@ export class AddAndEditUserComponent implements OnInit {
       medicalBoardNumber = this.user.medicalBoardNumber
       professionalType = this.user.professionalType
     }
+
     if (this.userType === 0) {
       this.form = this.fb.group({
         name: [this.user?.name || '', [Validators.required]],
