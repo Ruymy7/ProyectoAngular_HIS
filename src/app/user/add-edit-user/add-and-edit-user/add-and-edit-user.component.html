@@ -12,94 +12,122 @@
         <mat-icon>error</mat-icon> Se ha producido un error. Inténtalo de nuevo.
       </div>
       <mat-card-content>
-        <h3>Datos personales</h3>
-        <div class="row">
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Datos personales
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="row">
 
-          <mat-form-field appearance="standard">
-            <mat-label>Nombre</mat-label>
-            <input matInput placeholder="" name="name" class="form-control" required type="text" formControlName="name"
-              [class.is-invalid]="name.invalid && name.touched">
-            <mat-error *ngIf="name.invalid && name.touched">{{"El nombre es obligatorio"}}</mat-error>
-          </mat-form-field>
+              <mat-form-field appearance="standard">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="" name="name" class="form-control" required type="text"
+                  formControlName="name" [class.is-invalid]="name.invalid && name.touched">
+                <mat-error *ngIf="name.invalid && name.touched">{{"El nombre es obligatorio"}}</mat-error>
+              </mat-form-field>
 
-          <mat-form-field appearance="standard">
-            <mat-label>Primer apellido</mat-label>
-            <input matInput placeholder="" name="lastName" class="form-control" required type="text"
-              formControlName="lastName" [class.is-invalid]="lastName.invalid && lastName.touched">
-            <mat-error *ngIf="lastName.invalid && lastName.touched">{{"El primer apellido es obligatorio"}}</mat-error>
-          </mat-form-field>
+              <mat-form-field appearance="standard">
+                <mat-label>Primer apellido</mat-label>
+                <input matInput placeholder="" name="lastName" class="form-control" required type="text"
+                  formControlName="lastName" [class.is-invalid]="lastName.invalid && lastName.touched">
+                <mat-error *ngIf="lastName.invalid && lastName.touched">{{"El primer apellido es obligatorio"}}
+                </mat-error>
+              </mat-form-field>
 
-          <mat-form-field appearance="standard">
-            <mat-label>Segundo apellido</mat-label>
-            <input matInput placeholder="" name="secondLastName" class="form-control" type="text"
-              formControlName="secondLastName">
-          </mat-form-field>
+              <mat-form-field appearance="standard">
+                <mat-label>Segundo apellido</mat-label>
+                <input matInput placeholder="" name="secondLastName" class="form-control" type="text"
+                  formControlName="secondLastName">
+              </mat-form-field>
 
-        </div>
-        <div class="row">
+            </div>
+            <div class="row">
 
-          <mat-form-field appearance="standard">
-            <mat-label>Género</mat-label>
-            <mat-select name="gender" class="form-control" type="text" formControlName="gender">
-              <mat-option value="Masculino">Masculino</mat-option>
-              <mat-option value="Femenino">Femenino</mat-option>
-            </mat-select>
-          </mat-form-field>
+              <mat-form-field appearance="standard">
+                <mat-label>Género</mat-label>
+                <mat-select name="gender" class="form-control" type="text" formControlName="gender">
+                  <mat-option value="Masculino">Masculino</mat-option>
+                  <mat-option value="Femenino">Femenino</mat-option>
+                </mat-select>
+              </mat-form-field>
 
-          <mat-form-field appearance="standard">
-            <mat-label>NIF o Pasaporte</mat-label>
-            <input matInput placeholder="" maxlength="9" name="idNumber" class="form-control" type="text"
-              formControlName="idNumber">
-          </mat-form-field>
+              <mat-form-field appearance="standard">
+                <mat-label>NIF o Pasaporte</mat-label>
+                <input matInput placeholder="" maxlength="9" name="idNumber" class="form-control" type="text"
+                  formControlName="idNumber" [class.is-invalid]="idNumber.invalid && idNumber.touched">
+                <mat-error *ngIf="name.invalid && name.touched">{{"NIF o Pasaporte incorrecto"}}</mat-error>
+              </mat-form-field>
 
-          <mat-form-field appearance="standard">
-            <mat-label>Fecha de nacimiento</mat-label>
-            <input matInput [matDatepicker]="picker" name="birthdate" class="form-control" type="text"
-              formControlName="birthdate">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
+              <mat-form-field appearance="standard">
+                <mat-label>Fecha de nacimiento</mat-label>
+                <input matInput [matDatepicker]="picker" name="birthdate" class="form-control" type="text"
+                  [max]="maxDate" formControlName="birthdate" [class.is-invalid]="idNumber.invalid && idNumber.touched"
+                  disabled>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker disabled="false"></mat-datepicker>
+                <mat-error *ngIf="birthdate.invalid && birthdate.touched">{{"Fecha incorrecta"}}</mat-error>
+              </mat-form-field>
 
-        </div>
-        <mat-divider [inset]="true"></mat-divider>
-        <h3>Dirección</h3>
-        <div formGroupName="address">
-          <div class="row">
+            </div>
+          </mat-expansion-panel>
 
-            <mat-form-field appearance="standard">
-              <mat-label>Calle</mat-label>
-              <input matInput placeholder="" name="street" class="form-control" type="text" formControlName="street">
-            </mat-form-field>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Dirección
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div formGroupName="address">
+              <div class="row">
 
-            <mat-form-field appearance="standard">
-              <mat-label>Número</mat-label>
-              <input matInput placeholder="" name="number" class="form-control" type="text" formControlName="number">
-            </mat-form-field>
+                <mat-form-field appearance="standard">
+                  <mat-label>Calle</mat-label>
+                  <input matInput placeholder="" name="street" class="form-control" type="text"
+                    formControlName="street">
+                </mat-form-field>
 
-            <mat-form-field appearance="standard">
-              <mat-label>Puerta</mat-label>
-              <input matInput placeholder="" name="door" class="form-control" type="text" formControlName="door">
-            </mat-form-field>
+                <mat-form-field appearance="standard">
+                  <mat-label>Número</mat-label>
+                  <input matInput placeholder="" name="number" class="form-control" type="text"
+                    formControlName="number">
+                </mat-form-field>
 
-          </div>
-          <div class="row">
+                <mat-form-field appearance="standard">
+                  <mat-label>Puerta</mat-label>
+                  <input matInput placeholder="" name="door" class="form-control" type="text" formControlName="door">
+                </mat-form-field>
 
-            <mat-form-field appearance="standard">
-              <mat-label>Código postal</mat-label>
-              <input matInput placeholder="" name="postalCode" class="form-control" type="text"
-                formControlName="postalCode">
-            </mat-form-field>
+              </div>
+              <div class="row">
 
-            <mat-form-field appearance="standard">
-              <mat-label>Ciudad</mat-label>
-              <input matInput placeholder="" name="city" class="form-control" type="text" formControlName="city">
-            </mat-form-field>
+                <mat-form-field appearance="standard">
+                  <mat-label>Código postal</mat-label>
+                  <input matInput placeholder="" name="postalCode" class="form-control" type="text"
+                    formControlName="postalCode">
+                </mat-form-field>
 
-          </div>
-        </div>
-        <h3>Tipo de usuario</h3>
-        <mat-tab-group mat-align-tabs="center">
-          <mat-tab label="Paciente" *ngIf="userType === 0">
+                <mat-form-field appearance="standard">
+                  <mat-label>Ciudad</mat-label>
+                  <input matInput placeholder="" name="city" class="form-control" type="text" formControlName="city">
+                </mat-form-field>
+
+              </div>
+            </div>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Información médica
+              </mat-panel-title>
+              <mat-panel-description>
+                <p *ngIf="userType === 0">Tipo: Paciente</p>
+                <p *ngIf="userType === 1">Tipo: Profesional</p>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
             <div class="row">
 
               <mat-form-field appearance="standard" *ngIf="userType === 0">
@@ -109,78 +137,94 @@
                 <mat-error *ngIf="NHC.invalid && NHC.touched">{{"El NHC es obligatorio"}}</mat-error>
               </mat-form-field>
 
+              <div class="row" *ngIf="userType === 1">
+                <mat-form-field appearance="standard">
+                  <mat-label>Nº Colegiado</mat-label>
+                  <input matInput placeholder="" required name="medicalBoardNumber" class="form-control" type="text"
+                    formControlName="medicalBoardNumber"
+                    [class.is-invalid]="medicalBoardNumber.invalid && medicalBoardNumber.touched">
+                  <mat-error *ngIf="medicalBoardNumber.invalid && medicalBoardNumber.touched">
+                    {{"El Nº Colegiado es obligatorio"}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="standard">
+                  <mat-label>Tipo de profesional</mat-label>
+                  <mat-select name="professionalType" class="form-control" type="text"
+                    formControlName="professionalType">
+                    <mat-option value="Médico">Médico</mat-option>
+                    <mat-option value="Enfermero">Enfermero</mat-option>
+                    <mat-option value="Administrativo">Administrativo</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
             </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel *ngIf="userType === 0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Listado de aseguradoras
+              </mat-panel-title>
+            </mat-expansion-panel-header>
             <div class="insuranceListHeader">
-              <h3>Listado de aseguradoras</h3>
               <button mat-icon-button color="primary" aria-label="Añadir aseguradora" id="addInsurance" type="button"
                 (click)="addInsurance()">
                 <mat-icon>add</mat-icon>
               </button>
             </div>
-            <ng-container formArrayName="insurance">
-              <div class="insurance" *ngFor="let insurance of insuranceList.controls; let i = index">
-                <ng-container [formGroupName]="i">
-                  <mat-form-field appearance="standard">
-                    <mat-label>Nº tarjeta</mat-label>
-                    <input matInput placeholder="" name="cardNumber" class="form-control" type="text"
-                      formControlName="cardNumber">
-                  </mat-form-field>
-    
-                  <mat-form-field appearance="standard">
-                    <mat-label>Aseguradora</mat-label>
-                    <input matInput placeholder="" name="name" class="form-control" type="text"
-                      formControlName="name">
-                  </mat-form-field>
-    
-                  <mat-form-field appearance="standard">
-                    <mat-label>Tipo de seguro</mat-label>
-                    <mat-select name="type" class="form-control" type="text" formControlName="type">
-                      <mat-option value="salud">Salud</mat-option>
-                      <mat-option value="familiar">Familiar</mat-option>
-                      <mat-option value="dental">Dental</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-    
-                  <button mat-icon-button color="warn" aria-label="Eliminar aseguradora" (click)="deleteInsurance(i)">
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </ng-container>
-              </div>
+            <ng-container *ngIf="insuranceList.controls.length; else noInsurance">
+              <ng-container formArrayName="insurance">
+                <div class="insurance" *ngFor="let insurance of insuranceList.controls; let i = index">
+                  <ng-container [formGroupName]="i">
+                    <mat-form-field appearance="standard">
+                      <mat-label>Nº tarjeta</mat-label>
+                      <input matInput placeholder="" name="cardNumber" class="form-control" type="text"
+                        formControlName="cardNumber">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="standard">
+                      <mat-label>Aseguradora</mat-label>
+                      <input matInput placeholder="" name="name" class="form-control" type="text"
+                        formControlName="name">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="standard">
+                      <mat-label>Tipo de seguro</mat-label>
+                      <mat-select name="type" class="form-control" type="text" formControlName="type">
+                        <mat-option value="salud">Salud</mat-option>
+                        <mat-option value="familiar">Familiar</mat-option>
+                        <mat-option value="dental">Dental</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <button mat-icon-button color="warn" aria-label="Eliminar aseguradora" (click)="deleteInsurance(i)"
+                      type="button">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </ng-container>
+                </div>
+              </ng-container>
             </ng-container>
-          </mat-tab>
-          <mat-tab label="Profesional" *ngIf="userType === 1">
-            <div class="row">
-              <mat-form-field appearance="standard">
-                <mat-label>Nº Colegiado</mat-label>
-                <input matInput placeholder="" required name="medicalBoardNumber" class="form-control" type="text"
-                  formControlName="medicalBoardNumber"
-                  [class.is-invalid]="medicalBoardNumber.invalid && medicalBoardNumber.touched">
-                <mat-error *ngIf="medicalBoardNumber.invalid && medicalBoardNumber.touched">
-                  {{"El Nº Colegiado es obligatorio"}}</mat-error>
-              </mat-form-field>
-
-              <mat-form-field appearance="standard">
-                <mat-label>Tipo de profesional</mat-label>
-                <mat-select name="professionalType" class="form-control" type="text" formControlName="professionalType">
-                  <mat-option value="Médico">Médico</mat-option>
-                  <mat-option value="Enfermero">Enfermero</mat-option>
-                  <mat-option value="Administrativo">Administrativo</mat-option>
-                </mat-select>
-              </mat-form-field>
-
-            </div>
-          </mat-tab>
-        </mat-tab-group>
-
+            <ng-template #noInsurance>
+              <div id="noInsurance">
+                <p>El paciente no tiene ninguna aseguradora asignada</p>
+              </div>
+            </ng-template>
+          </mat-expansion-panel>
+        </mat-accordion>
       </mat-card-content>
       <mat-card-actions>
         <div class="buttons">
-          <button mat-stroked-button routerLink='/'><mat-icon>arrow_back_ios</mat-icon> Cancelar</button>
-          <button mat-raised-button color="primary" type="submit"><mat-icon>save</mat-icon> Guardar</button>
+          <button mat-stroked-button routerLink='/' type="button">
+            <mat-icon>arrow_back_ios</mat-icon> Cancelar
+          </button>
+          <button mat-raised-button color="primary" type="submit">
+            <mat-icon>save</mat-icon> Guardar
+          </button>
         </div>
       </mat-card-actions>
     </form>
-    <ng-template #loading id="loading">
+    <ng-template #loading>
       <div id="loading">
         <mat-spinner></mat-spinner>
       </div>

@@ -23,10 +23,13 @@ export class AddAndEditUserComponent implements OnInit {
   insurance: any
   saved: boolean = false
   errorMsg: boolean = false
+  maxDate: Date
+  step = 0;
 
   constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.maxDate = new Date()
     this.route.params.subscribe(params => {
       if (params.id) {
         this.userId = params.id
@@ -84,11 +87,29 @@ export class AddAndEditUserComponent implements OnInit {
     let medicalBoardNumber = ''
     let professionalType = ''
 
+    const commonData = {
+      name: [this.user?.name || '', [Validators.required]],
+      lastName: [this.user?.lastName || '', [Validators.required]],
+      secondLastName: [this.user?.lastName || ''],
+      gender: [this.user?.gender || ''],
+      birthdate: [this.user?.birthdate || ''],
+      idNumber: [this.user?.idNumber || '', [Validators.minLength(9)]],
+      address: this.fb.group({
+        street: [this.user?.address?.street || ''],
+        number: [this.user?.address?.number || ''],
+        door: [this.user?.address?.door || ''],
+        postalCode: [this.user?.address?.postalCode || ''],
+        city: [this.user?.address?.city || '']
+      })
+    }
+
     if (this.user && this.isPatient(this.user)) {
       NHC = this.user.NHC
-      this.user.insurance.forEach(ins => {
-        insurance.push(this.fb.group({ ...ins }))
-      })
+      if (this.user.insurance && this.user.insurance.length) {
+        this.user.insurance.forEach(ins => {
+          insurance.push(this.fb.group({ ...ins }))
+        })
+      }
     } else if (this.user && !this.isPatient(this.user)) {
       medicalBoardNumber = this.user.medicalBoardNumber
       professionalType = this.user.professionalType
@@ -96,37 +117,13 @@ export class AddAndEditUserComponent implements OnInit {
 
     if (this.userType === 0) {
       this.form = this.fb.group({
-        name: [this.user?.name || '', [Validators.required]],
-        lastName: [this.user?.lastName || '', [Validators.required]],
-        secondLastName: [this.user?.lastName || ''],
-        gender: [this.user?.gender || ''],
-        birthdate: [this.user?.birthdate || ''],
-        idNumber: [this.user?.idNumber || ''],
-        address: this.fb.group({
-          street: [this.user?.address?.street || ''],
-          number: [this.user?.address?.number || ''],
-          door: [this.user?.address?.door || ''],
-          postalCode: [this.user?.address?.postalCode || ''],
-          city: [this.user?.address?.city || '']
-        }),
+        ...commonData,
         NHC: [NHC],
         insurance: this.fb.array(insurance)
       }, {});
     } else {
       this.form = this.fb.group({
-        name: [this.user?.name || '', [Validators.required]],
-        lastName: [this.user?.lastName || '', [Validators.required]],
-        secondLastName: [this.user?.lastName || ''],
-        gender: [this.user?.gender || ''],
-        birthdate: [this.user?.birthdate || ''],
-        idNumber: [this.user?.idNumber || ''],
-        address: this.fb.group({
-          street: [this.user?.address?.street || ''],
-          number: [this.user?.address?.number || ''],
-          door: [this.user?.address?.door || ''],
-          postalCode: [this.user?.address?.postalCode || ''],
-          city: [this.user?.address?.city || '']
-        }),
+        ...commonData,
         medicalBoardNumber: [medicalBoardNumber],
         professionalType: [professionalType]
       }, {});
@@ -153,6 +150,8 @@ export class AddAndEditUserComponent implements OnInit {
 
   get name() { return this.form.get('name') }
   get lastName() { return this.form.get('lastName') }
+  get idNumber() { return this.form.get('idNumber') }
+  get birthdate() { return this.form.get('birthdate') }
   get NHC() { return this.form.get('NHC') }
   get medicalBoardNumber() { return this.form.get('medicalBoardNumber') }
   get insuranceList() { return this.form.get('insurance') as FormArray }
