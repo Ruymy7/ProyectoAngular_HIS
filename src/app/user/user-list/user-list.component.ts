@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserService } from '../user.service'
 import { Professional } from 'src/app/models/professional.model';
 import { Patient } from 'src/app/models/patient.model';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/dialog/dialog/dialog.component';
+import { MatTabChangeEvent, MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-user-list',
@@ -17,9 +18,11 @@ export class UserListComponent {
   professionals: Professional[]
   patientDisplayedColumns = ['NHC', 'name', 'lastName', 'gender', 'edit', 'delete', 'more']
   professionalDisplayedColumns = ['medicalBoardNumber', 'name', 'lastName', 'type', 'edit', 'delete', 'more']
+  selectedTab: number = 0
 
   constructor(private userService: UserService, private router: Router, private dialog: MatDialog) { }
-
+  @ViewChild('tabGroup') tabGroup: MatTabGroup;
+  
   private getAllUsers() {
     this.userService.getAllUsers().subscribe(result => {
       this.patients = []
@@ -36,6 +39,10 @@ export class UserListComponent {
 
   ngOnInit(): void {
     this.getAllUsers()
+  }
+
+  ngAfterViewInit(): void {
+    this.selectedTab = this.tabGroup.selectedIndex
   }
 
   getUser(row: User): void {
@@ -76,5 +83,9 @@ export class UserListComponent {
         this.userService.deleteUsers(doctors).then(() => this.getAllUsers())
       }
     });
+  }
+
+  tabChanged(tabChangeEvent: MatTabChangeEvent): void {
+    this.selectedTab = tabChangeEvent.index
   }
 }
