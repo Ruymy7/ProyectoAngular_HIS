@@ -8,9 +8,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-1st - Run `npm run db` to start json-server as backend for this application
+We will  need two terminals to run the application:
 
-2nd - Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1st - Run `npm i` to install all dependencies
+
+2nd - Run `npm install -g json-server` to install this module which serves as the backend to test the application
+
+3rd - In one terminal run `npm run db` to start json-server
+
+4th - In the other terminal run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build
 
