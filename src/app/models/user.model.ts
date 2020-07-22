@@ -7,7 +7,7 @@ interface Address {
 }
 
 export interface User {
-  id: number
+  id: string
   name: string
   lastName: string
   secondLastName?: string

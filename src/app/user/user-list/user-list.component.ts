@@ -74,7 +74,7 @@ export class UserListComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        let doctors: number[] = []
+        let doctors: string[] = []
         this.professionals.forEach((professional, index) => {
           if (professional.hasOwnProperty('professionalType') && professional.professionalType === 'Médico') {
             doctors.push(professional.id)
