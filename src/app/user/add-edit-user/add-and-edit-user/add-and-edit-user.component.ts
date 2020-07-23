@@ -59,7 +59,7 @@ export class AddAndEditUserComponent implements OnInit {
     let previousUrl = ""
     if (this.form.valid) {
       if (this.userId) {
-        this.form.value.id = this.userId
+        this.form.value._id = this.userId
         this.userService.editUser(this.form.value).subscribe(result => {
           previousUrl = this.router.url
           this.saved = true
