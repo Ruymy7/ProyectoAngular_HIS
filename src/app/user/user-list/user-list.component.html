@@ -1,4 +1,4 @@
-<div class="tabGroup">
+<div class="tabGroup" *ngIf="patients || professionals; else loading">
   <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
     <mat-tab label="Pacientes">
       <table mat-table [dataSource]="patients" *ngIf="patients?.length">
@@ -134,3 +134,8 @@
     </button>
   </div>
 </div>
+<ng-template #loading>
+  <div id="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

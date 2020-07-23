@@ -14,8 +14,8 @@ import { MatTabChangeEvent, MatTabGroup } from '@angular/material/tabs';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent {
-  patients: Patient[]
-  professionals: Professional[]
+  patients: Patient[] = null
+  professionals: Professional[] = null
   patientDisplayedColumns = ['NHC', 'name', 'lastName', 'gender', 'more', 'edit', 'delete']
   professionalDisplayedColumns = ['medicalBoardNumber', 'name', 'lastName', 'type', 'more', 'edit', 'delete']
   selectedTab: number = 0
@@ -39,10 +39,6 @@ export class UserListComponent {
 
   ngOnInit(): void {
     this.getAllUsers()
-  }
-
-  ngAfterViewInit(): void {
-    this.selectedTab = this.tabGroup.selectedIndex
   }
 
   getUser(row: User): void {
