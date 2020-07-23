@@ -1,0 +1,33 @@
+.errorContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../../assets/error.jpg');
+  .text {
+    padding: 50px;
+    .error404 {
+      margin-bottom: 50px;
+      h1 {
+        font-weight: bold;
+        color: #292b0e;
+      }
+    }
+    button {
+      cursor: pointer;
+      border-radius: 10px;
+      border: 1px solid black;
+      display: flex;
+      align-items: center;
+      h3 {
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ import { UserDetailsComponent } from './user/user-details/user-details/user-deta
 import { DialogComponent } from './dialog/dialog/dialog.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { AddAndEditUserComponent } from './user/add-edit-user/add-and-edit-user/add-and-edit-user.component';
+import { Error404Component } from './errors/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AddAndEditUserComponent } from './user/add-edit-user/add-and-edit-user/
     UserListComponent,
     UserDetailsComponent,
     DialogComponent,
-    AddAndEditUserComponent
+    AddAndEditUserComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
