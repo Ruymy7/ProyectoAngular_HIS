@@ -8,15 +8,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-We will  need two terminals to run the application:
-
 1st - Run `npm i` to install all dependencies
 
-2nd - Run `npm install -g json-server` to install this module which serves as the backend to test the application
+2nd - You need to run the backend server of this repository: [link](https://github.com/Ruymy7/ProyectoNest_HIS)
 
-3rd - In one terminal run `npm run db` to start json-server
-
-4th - In the other terminal run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+3rd - Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build
 
