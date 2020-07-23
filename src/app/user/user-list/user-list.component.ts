@@ -46,7 +46,7 @@ export class UserListComponent {
   }
 
   getUser(row: User): void {
-    this.router.navigate(['/users/' + row.id])
+    this.router.navigate(['/users/' + row._id])
   }
 
   deleteUser(row: User): void {
@@ -56,7 +56,7 @@ export class UserListComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.userService.deleteUser(row.id).subscribe(() => {
+        this.userService.deleteUser(row._id).subscribe(() => {
           this.getAllUsers();
         });
       }
@@ -64,7 +64,7 @@ export class UserListComponent {
   }
 
   editUser(row: User): void {
-    this.router.navigate(['/users/edit/' + row.id])
+    this.router.navigate(['/users/edit/' + row._id])
   }
 
   deleteDoctors(): void {
@@ -77,7 +77,7 @@ export class UserListComponent {
         let doctors: string[] = []
         this.professionals.forEach((professional, index) => {
           if (professional.hasOwnProperty('professionalType') && professional.professionalType === 'Médico') {
-            doctors.push(professional.id)
+            doctors.push(professional._id)
           }
         })
         this.userService.deleteUsers(doctors).then(() => this.getAllUsers())

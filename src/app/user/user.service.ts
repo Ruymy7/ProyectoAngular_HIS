@@ -23,7 +23,7 @@ export class UserService {
     return this.httpClient.post<User>(environment.API_URL + 'users', userData)
   }
   editUser(userData: User): Observable<User> {
-    return this.httpClient.put<User>(environment.API_URL + `users/${userData.id}`, userData)
+    return this.httpClient.put<User>(environment.API_URL + `users/${userData._id}`, userData)
   }
   deleteUser(id: string): Observable<User> {
     return this.httpClient.delete<User>(environment.API_URL + `users/${id}`)

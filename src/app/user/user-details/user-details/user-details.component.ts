@@ -43,7 +43,7 @@ export class UserDetailsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.userService.deleteUser(row.id).subscribe(() => {
+        this.userService.deleteUser(row._id).subscribe(() => {
           this.router.navigate(['/'])
         });
       }
@@ -51,7 +51,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   editUser(row: User): void {
-    this.router.navigate(['/users/edit/' + row.id])
+    this.router.navigate(['/users/edit/' + row._id])
   }
 
 }

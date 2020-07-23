@@ -76,7 +76,7 @@ export class AddAndEditUserComponent implements OnInit {
         this.scrollToTop()
         setTimeout(() => {
           this.saved = false
-          if(this.router.url === previousUrl) this.router.navigate([`/users/${result.id}`]) // if the user has not changed view, navigate to user details view
+          if(this.router.url === previousUrl) this.router.navigate([`/users/${result._id}`]) // if the user has not changed view, navigate to user details view
         }, 2000)
       }, error => { this.errorMsg = true; this.scrollToTop() })
     } else {
