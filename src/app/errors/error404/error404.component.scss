@@ -10,12 +10,13 @@
   background-size: cover;
   background-image: url('../../../assets/error.jpg');
   .text {
-    padding: 50px;
+    padding: 150px;
     .error404 {
       margin-bottom: 50px;
-      h1 {
+      #error {
+        font-size: 70px;
         font-weight: bold;
-        color: #292b0e;
+        color: #292b0e75;
       }
     }
     button {
