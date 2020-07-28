@@ -1,0 +1,14 @@
+<div class="register">
+  <mat-card class="registerForm">
+    <form method="post">
+      <h1>Registro de usuario</h1>
+      <input type="text" [(ngModel)]="name" name="name" placeholder="Nombre" required="required" />
+      <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required="required" />
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required="required" />
+      <input type="password" [(ngModel)]="confirmPassword" name="password" placeholder="Repita la contraseña"
+        required="required" />
+      <button type="submit" (click)="register()">Register</button>
+    </form>
+    <button mat-stroked-button color="primary" routerLink='/login' type="button">A inicio de sesión</button>
+  </mat-card>
+</div>

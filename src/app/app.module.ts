@@ -12,6 +12,10 @@ import { DialogComponent } from './dialog/dialog/dialog.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { AddAndEditUserComponent } from './user/add-edit-user/add-and-edit-user/add-and-edit-user.component';
 import { Error404Component } from './errors/error404/error404.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { CoreModule } from './core';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,10 @@ import { Error404Component } from './errors/error404/error404.component';
     UserDetailsComponent,
     DialogComponent,
     AddAndEditUserComponent,
-    Error404Component
+    Error404Component,
+    LoginComponent,
+    RegisterComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +36,8 @@ import { Error404Component } from './errors/error404/error404.component';
     HttpClientModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},

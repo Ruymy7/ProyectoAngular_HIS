@@ -1,0 +1,11 @@
+<div class="login">
+  <mat-card class="loginForm">
+    <form method="post">
+      <h1>Inicio de sesión</h1>
+      <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required />
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required />
+      <button type="submit" (click)="logIn()">Iniciar sesión</button>
+    </form>
+    <button mat-stroked-button color="primary" routerLink='/register' type="button">Crear usuario</button>
+  </mat-card>
+</div>
