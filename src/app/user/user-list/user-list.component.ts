@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/dialog/dialog/dialog.component';
 import { MatTabChangeEvent, MatTabGroup } from '@angular/material/tabs';
+import { StorageService } from 'src/app/auth/storage.service';
 
 @Component({
   selector: 'app-user-list',
@@ -20,7 +21,7 @@ export class UserListComponent {
   professionalDisplayedColumns = ['medicalBoardNumber', 'name', 'lastName', 'type', 'more', 'edit', 'delete']
   selectedTab: number = 0
 
-  constructor(private userService: UserService, private router: Router, private dialog: MatDialog) { }
+  constructor(private userService: UserService, private router: Router, private dialog: MatDialog, private storageService: StorageService) { }
   @ViewChild('tabGroup') tabGroup: MatTabGroup;
   
   private getAllUsers() {
@@ -34,6 +35,10 @@ export class UserListComponent {
           this.professionals.push(<Professional>r)
         }
       })
+    }, error => {
+      if(error.status === 401) {
+        this.storageService.logout()
+      }
     })
   }
 
@@ -54,6 +59,10 @@ export class UserListComponent {
       if (result) {
         this.userService.deleteUser(row._id).subscribe(() => {
           this.getAllUsers();
+        }, error => {
+          if(error.status === 401) {
+            this.storageService.logout()
+          }
         });
       }
     });
@@ -76,7 +85,11 @@ export class UserListComponent {
             doctors.push(professional._id)
           }
         })
-        this.userService.deleteUsers(doctors).then(() => this.getAllUsers())
+        this.userService.deleteUsers(doctors).then(() => this.getAllUsers()).catch(error => {
+          if(error.status === 401) {
+            this.storageService.logout()
+          }
+        })
       }
     });
   }

@@ -4,6 +4,7 @@ import { Professional } from 'src/app/models/professional.model';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { UserService } from '../../user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StorageService } from 'src/app/auth/storage.service';
 
 enum type {
   patient,
@@ -26,7 +27,7 @@ export class AddAndEditUserComponent implements OnInit {
   maxDate: Date
   step = 0;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute, private router: Router, private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.maxDate = new Date()
@@ -39,6 +40,10 @@ export class AddAndEditUserComponent implements OnInit {
             else this.userType = type.professional
             this.user = user
             this.buildForm()
+          }, error => {
+            if(error.status === 401) {
+              this.storageService.logout()
+            }
           });
       } else {
         this.route.queryParams.subscribe(query => {
@@ -68,7 +73,10 @@ export class AddAndEditUserComponent implements OnInit {
             this.saved = false
             if(this.router.url === previousUrl) this.router.navigate([`/users/${this.userId}`]) // if the user has not changed view, navigate to user details view
           }, 2000)
-        }, error => { this.errorMsg = true; this.scrollToTop() })
+        }, error => { 
+          if(error.status === 401) return this.storageService.logout()
+          this.errorMsg = true; this.scrollToTop() 
+        })
       }
       else this.userService.addUser(this.form.value).subscribe(result => {
         previousUrl = this.router.url
@@ -78,7 +86,10 @@ export class AddAndEditUserComponent implements OnInit {
           this.saved = false
           if(this.router.url === previousUrl) this.router.navigate([`/users/${result._id}`]) // if the user has not changed view, navigate to user details view
         }, 2000)
-      }, error => { this.errorMsg = true; this.scrollToTop() })
+      }, error => { 
+        if(error.status === 401) return this.storageService.logout()
+          this.errorMsg = true; this.scrollToTop() 
+      })
     } else {
       this.form.markAllAsTouched()
     }

@@ -6,6 +6,7 @@ import { Patient } from 'src/app/models/patient.model';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/models/user.model';
 import { DialogComponent } from 'src/app/dialog/dialog/dialog.component';
+import { StorageService } from 'src/app/auth/storage.service';
 
 enum type {
   patient,
@@ -21,7 +22,7 @@ export class UserDetailsComponent implements OnInit {
   user: Patient | Professional
   userType: type
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private dialog: MatDialog) { }
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -31,6 +32,10 @@ export class UserDetailsComponent implements OnInit {
             if(user.hasOwnProperty('NHC')) this.userType = type.patient
             else this.userType = type.professional
             this.user = user
+          }, error => {
+            if(error.status === 401) {
+              this.storageService.logout()
+            }
           });
       }
     });
@@ -45,6 +50,10 @@ export class UserDetailsComponent implements OnInit {
       if (result) {
         this.userService.deleteUser(row._id).subscribe(() => {
           this.router.navigate(['/'])
+        }, error => {
+          if(error.status === 401) {
+            this.storageService.logout()
+          }
         });
       }
     });
