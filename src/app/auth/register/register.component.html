@@ -1,13 +1,58 @@
 <div class="register">
   <mat-card class="registerForm">
-    <form method="post">
+    <form method="post" (ngSubmit)="register()" autocomplete="off" [formGroup]="registerForm">
       <h1>Registro de usuario</h1>
-      <input type="text" [(ngModel)]="name" name="name" placeholder="Nombre" required="required" />
-      <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required="required" />
-      <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required="required" />
-      <input type="password" [(ngModel)]="confirmPassword" name="password" placeholder="Repita la contraseña"
-        required="required" />
-      <button type="submit" (click)="register()">Register</button>
+
+
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput [formControl]="name" placeholder="Nombre" formControlName="name" type="text"
+          [class.is-invalid]="name.invalid && name.touched">
+        <mat-error *ngIf="name.hasError('required')">
+          El nombre es necesario
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput [formControl]="email" placeholder="Email" formControlName="email" type="email"
+          [class.is-invalid]="email.invalid && email.touched">
+        <mat-error *ngIf="email.hasError('required')">
+          El email es necesario
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput [formControl]="password" placeholder="Contraseña" formControlName="password" type="password"
+          [class.is-invalid]="password.invalid && password.touched">
+        <mat-error *ngIf="password.hasError('required')">
+          La contraseña es necesaria
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Confirmar contraseña</mat-label>
+        <input matInput [formControl]="confirmPassword" placeholder="Confirmar contraseña" type="password"
+          formControlName="confirmPassword" [class.is-invalid]="confirmPassword.touched && (registerForm.hasError('notSamePassword') || confirmPassword.invalid )">
+        <mat-error *ngIf="confirmPassword.hasError('required')">
+          Confirmar la contraseña es necesario
+        </mat-error>
+      </mat-form-field>
+      <mat-error *ngIf="password.touched && confirmPassword.touched && registerForm.hasError('notSamePassword') " class="notSamePassword">
+        Las contraseñas no coinciden
+      </mat-error>
+
+      <button type="submit">Registro</button>
+      <div class="saved" *ngIf="saved">
+        <mat-icon>save</mat-icon> Usuario creado correctamente
+      </div>
+      <div class="errorMsg" *ngIf="userExisting">
+        <mat-icon>error</mat-icon> Ya existe un usuario con este correo electrónico
+      </div>
+      <div class="errorMsg" *ngIf="error">
+        <mat-icon>error</mat-icon> Se ha producido un error. Inténtalo de nuevo.
+      </div>
     </form>
     <button mat-stroked-button color="primary" routerLink='/login' type="button">A inicio de sesión</button>
   </mat-card>
