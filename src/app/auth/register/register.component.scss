@@ -1,3 +1,5 @@
+@import '../../../colors.scss';
+
 .registerForm {
   min-width: 300px;
   max-width: 20%;
@@ -20,7 +22,7 @@
       font-size: 0.875rem;
       color: #ffffff;
       font-weight: bold;
-      background-color: #bcd8c1;
+      background-color: $light;
       width: 100%;
       display: block;
       padding: 0.875rem 1rem;
@@ -29,7 +31,7 @@
       cursor: pointer;
     }
     button:hover {
-      background: #bcd8c198;
+      background: $lightHover;
     }
   }
   .mat-stroked-button {
