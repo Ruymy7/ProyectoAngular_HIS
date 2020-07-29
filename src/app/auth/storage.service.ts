@@ -4,7 +4,7 @@ import {Session} from "./models/session.model";
 
 @Injectable()
 export class StorageService {
-  private localStorageService;
+  private localStorageService: Storage;
   private currentSession : Session = null;
   constructor(private router: Router) {
     this.localStorageService = localStorage;
@@ -15,7 +15,7 @@ export class StorageService {
     this.localStorageService.setItem('currentUser', JSON.stringify(session));
   }
   loadSessionData(): Session{
-    var sessionStr = this.localStorageService.getItem('currentUser');
+    const sessionStr = this.localStorageService.getItem('currentUser');
     return (sessionStr) ? <Session> JSON.parse(sessionStr) : null;
   }
   getCurrentSession(): Session {
@@ -26,7 +26,7 @@ export class StorageService {
     this.currentSession = null;
   }
   isAuthenticated(): boolean {
-    return (this.getCurrentToken() != null) ? true : false;
+    return this.getCurrentToken() !== null;
   };
   getCurrentToken(): string {
     var session = this.getCurrentSession();
