@@ -35,4 +35,22 @@
   .mat-stroked-button {
     margin: 10px;
   }
+
+  .errorMsg {
+    -webkit-box-shadow: 2px 2px 10px 0px rgba(245,198,203,1);
+    -moz-box-shadow: 2px 2px 10px 0px rgba(245,198,203,1);
+    box-shadow: 2px 2px 10px 0px rgba(245,198,203,1);
+    display: flex;
+    align-items: center;
+    border-color: #f5c6cb;
+    border-radius: 5px;
+    color: #721c24;
+    background: #f8d7da;
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0px 15px 0px;
+    mat-icon {
+      margin: 0px 10px 0px 10px;
+    }
+  }
 }

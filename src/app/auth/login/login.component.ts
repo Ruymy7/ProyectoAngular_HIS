@@ -13,6 +13,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginComponent {
 
   loginForm: FormGroup
+  notExists: boolean = false
+  error: boolean = false
 
   constructor(private authService: AuthService, private storageService: StorageService, private router: Router, private fb: FormBuilder) { }
 
@@ -24,12 +26,16 @@ export class LoginComponent {
   }
 
   logIn() {
+    this.notExists = false; this.error = false
     if(this.loginForm.valid) {
       this.authService.logIn(this.loginForm.value).subscribe((response: LogInResponseDto) => {
         if(response.status) {
           this.storageService.setCurrentSession(response.data)
           this.router.navigate(['/'])
         }
+      }, error => {
+        if(error.status === 401) this.notExists = true
+        else this.error = true
       })
     }
   }
