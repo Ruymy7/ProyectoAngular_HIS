@@ -6,6 +6,12 @@ Frontend of the project created in the Bootcamp In House GeeksHubs - FutuRS (Rib
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
+## Deployed application
+
+This application is already deployed in https://his-project-angular.herokuapp.com/ for testing. As it is deployed in the Heroku free tier server, it will take some time to run the first time you connect after 30 minutes.
+
+This deployed app is connected to the backend of [this repository](https://github.com/Ruymy7/ProyectoNest_HIS) that is deployed in https://his-project-nestjs.herokuapp.com/
+
 ## Development server
 
 1st - Run `npm i` to install all dependencies
