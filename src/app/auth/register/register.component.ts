@@ -20,14 +20,13 @@ export class RegisterComponent {
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     }, { validators: this.checkPasswords })
   }
 
   register() {
-    console.log(this.registerForm.hasError('notSamePassword'));
     this.userExisting = false; this.error = false; this.saved = false
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe(result => {
